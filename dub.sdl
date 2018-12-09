@@ -1,0 +1,26 @@
+name "dale"
+description "a paranoid D task runner"
+version "0.0.1"
+license "FreeBSD 2-clause"
+
+configuration "dale" {
+    targetType "executable"
+    versions "APP"
+    mainSourceFile "src/main.d"
+    buildRequirements "disallowDeprecations" "requireBoundsCheck"
+    buildOptions "warningsAsErrors"
+}
+
+configuration "dl" {
+    targetType "library"
+    buildRequirements "disallowDeprecations" "requireBoundsCheck"
+    buildOptions "warningsAsErrors"
+}
+
+configuration "unittest" {
+    targetType "executable"
+    mainSourceFile "tests.d"
+    buildRequirements "disallowDeprecations" "requireBoundsCheck"
+    buildOptions "warningsAsErrors" "unittests"
+    dflags "-main"
+}

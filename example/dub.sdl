@@ -1,0 +1,28 @@
+name "arithmancy"
+description "an *advanced* mathematical librarie"
+version "0.0.1"
+
+configuration "arithmancy" {
+    targetType "library"
+}
+
+configuration "add_two" {
+    targetType "executable"
+    targetName "add_two"
+    versions "APP"
+    mainSourceFile "src/main.d"
+}
+
+configuration "unittest" {
+    targetType "executable"
+    mainSourceFile "tests.d"
+    buildOptions "unittests"
+    dflags "-main"
+}
+
+configuration "shi_sha" {
+    targetName "shi_sha"
+    targetType "executable"
+    mainSourceFile "dale.d"
+    dependency "dale" version="~0.0.1" path=".."
+}
