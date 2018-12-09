@@ -2,11 +2,10 @@
 
 import core.stdc.stdlib;
 import std.algorithm;
-import std.array;
 import std.functional;
 import std.process;
+import std.range;
 import std.stdio;
-import std.typetuple;
 
 // Dale API version
 immutable DALE_VERSION = "0.0.1";
@@ -14,6 +13,9 @@ immutable DALE_VERSION = "0.0.1";
 // Dub configuration toggle to prevent dale scripts from bundling
 // with regular project artifacts.
 immutable DALE_FEATURE = "shi_sha";
+
+// An attribute for registering tasks.
+immutable TASK = "task";
 
 // Environment name controlling verbosity
 immutable DALE_VERBOSE_ENVIRONMENT_NAME = "VERBOSE";
@@ -145,29 +147,23 @@ void loadTasks(string[] args, string defaultTaskName, TaskTable taskTable) {
     }
 }
 
-// Query available tasks with implementations in a module.
-template getTaskTable(alias moduleName) {
-    alias memberNames = __traits(allMembers, moduleName);
+// Register all available, statically declared tasks,
+// Given a module name,
+// CLI arguments,
+// and a default task.
+template yyyup(alias mod, alias args, alias defaultTaskName) {
+    const char[] yyyup = "
+    import std.functional;
+    import std.traits;
 
-    template isTask(alias memberName) {
-        enum isTask = is(typeof(__traits(getMember, moduleName, memberName)) == Task);
+    TaskTable taskTable;
+
+    foreach(memberName; __traits(allMembers, " ~ mod ~ ")) {
+        static if (hasUDA!(__traits(getMember, " ~ mod ~ ", memberName), TASK)) {
+            Task task = toDelegate(&__traits(getMember, " ~ mod ~ ", memberName));
+            taskTable[memberName] = task;
+        }
     }
 
-    alias taskNames = Filter!(isTask, memberNames);
-
-    template nameTaskTuple(alias memberName) {
-        Task task = __traits(getMember, moduleName, memberName);
-        alias nameTaskTuple = tuple(name, task);
-    }
-
-    alias taskTable = taskNames
-        .map(nameImplTuple)
-        .assocArray;
-}
-
-// Register available tasks with CLI entrypoint,
-// Given a CLI arguments binding
-// and a default task binding.
-template yyyup(alias args, alias defaultTaskName) {
-    alias yyyup = loadTasks(args, defaultTaskName, getTaskTable(__MODULE__));
+    loadTasks(" ~ args ~ ", \"" ~ defaultTaskName ~ "\", taskTable);";
 }
