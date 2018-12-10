@@ -6,6 +6,7 @@ import core.stdc.stdlib;
 import std.format;
 import std.getopt;
 import std.stdio;
+import std.typecons;
 
 bool listTasks;
 bool showVersion;
@@ -26,25 +27,38 @@ void banner() {
 // CLI entrypoint
 version(APP) {
     void main(string[] args) {
+        auto argsRest = args[1..args.length]; // Drop program name
+
         immutable program = args[0];
 
-        getopt(
-            args,
+        auto spec = tuple(
             "list|l", &listTasks,
             "version|v", &showVersion
         );
 
-        if (showVersion) {
-            banner();
-            exit(0);
-        }
+        try {
+            auto opts = getopt((args ~ spec).expand);
 
-        auto subcommand = ["run", "--config", DALE_FEATURE, "--"];
+            if (opts.helpWanted) {
+                usage(program, opts);
+                exit(0);
+            }
 
-        if (listTasks) {
-            exec("dub", subcommand ~= ["-l"]);
-        } else {
-            exec("dub", subcommand ~= args);
+            if (showVersion) {
+                banner();
+                exit(0);
+            }
+
+            auto subcommand = ["run", "--config", DALE_FEATURE, "--"];
+
+            if (listTasks) {
+                exec("dub", subcommand ~= ["-l"]);
+            } else {
+                exec("dub", subcommand ~= argsRest);
+            }
+        } catch (GetOptException e) {
+            usage(program, getopt(([program, "-h"] ~ spec).expand));
+            exit(1);
         }
     }
 }

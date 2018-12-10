@@ -2,6 +2,7 @@
 
 import core.stdc.stdlib;
 import std.algorithm;
+import std.file;
 import std.functional;
 import std.process;
 import std.range;
@@ -73,34 +74,65 @@ void phony(void function()[] tasks) {
 // Hey genius, avoid executing commands whenever possible! Look for D libraries instead.
 //
 // Executes the given program with the given arguments.
-// Returns the command object.
+// Returns a handle to the process.
 auto execMut(string program, string[] arguments = []) {
     if (environment.get(DALE_VERBOSE_ENVIRONMENT_NAME) !is null) {
         writefln("%s %s", program, join(arguments, " "));
     }
 
-    return execute([program] ~ arguments);
+    return pipeProcess([program] ~ arguments);
 }
 
 // Hey genius, avoid executing commands whenever possible! Look for D libraries instead.
 //
 // Executes the given program with the given arguments.
-// Returns the output object.
+// Returns a handle to the process's stdout.
 // Panics if the command exits with a failure status.
-auto execOutput(string program, string[] arguments = []) {
+auto execStdout(string program, string[] arguments = []) {
     auto execution = execMut(program, arguments);
-    assert(execution.status == 0);
-    return execution.output;
+    assert(wait(execution.pid) == 0);
+    return execution.stdout;
 }
 
 // Hey genius, avoid executing commands whenever possible! Look for D libraries instead.
 //
 // Executes the given program with the given arguments.
-// Returns the status.
+// Returns a handle to the process's stdout.
+// Panics if the command exits with a failure status.
+auto execStderr(string program, string[] arguments = []) {
+    auto execution = execMut(program, arguments);
+    assert(wait(execution.pid) == 0);
+    return execution.stderr;
+}
+
+// Hey genius, avoid executing commands whenever possible! Look for D libraries instead.
+//
+// Executes the given program with the given arguments.
+// Returns the process's stdout content as a UTF-8 string.
+// Panics if the command exits with a failure status.
+auto execStdoutUTF8(string program, string[] arguments = []) {
+    auto childStdout = execStdout(program, arguments);
+    return readText(childStdout.name);
+}
+
+// Hey genius, avoid executing commands whenever possible! Look for D libraries instead.
+//
+// Executes the given program with the given arguments.
+// Returns the process's stderr content as a UTF-8 string.
+// Panics if the command exits with a failure status.
+auto execStderrUTF8(string program, string[] arguments = []) {
+    auto childStderr = execStderr(program, arguments);
+    return readText(childStderr.name);
+}
+
+// Hey genius, avoid executing commands whenever possible! Look for D libraries instead.
+//
+// Executes the given program with the given arguments.
+// Returns the status value.
 // Panics if the command could not run to completion.
 auto execStatus(string program, string[] arguments = []) {
     auto execution = execMut(program, arguments);
-    return execution.status;
+    return wait(execution.pid);
 }
 
 // Hey genius, avoid executing commands whenever possible! Look for D libraries instead.
@@ -135,22 +167,18 @@ void loadTasks(string[] args, string defaultTaskName, TaskTable taskTable) {
             exit(0);
             break;
         default:
-            auto task = taskTable[arg];
-
-            if (task is null) {
+            if (arg !in taskTable) {
                 writefln("Unknown task %s", arg);
                 exit(1);
             }
 
-            task();
+            taskTable[arg]();
         }
     }
 }
 
 // Register all available, statically declared tasks,
-// Given a module name,
-// CLI arguments,
-// and a default task.
+// Given a module name, CLI arguments, and a default task.
 template yyyup(alias mod, alias args, alias defaultTaskName) {
     const char[] yyyup = "
     import std.functional;

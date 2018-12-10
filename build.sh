@@ -25,10 +25,10 @@ unittest() {
 
 integration_test() {
     install
-    sh -c 'cd example && dub run dale -- -l'
-    sh -c 'cd example && dub run dale -- -v'
-    sh -c 'cd example && dub run dale -- -h'
-    sh -c 'cd example && dub run dale'
+    sh -c 'cd example && VERBOSE=1 dub run dale -- -l'
+    sh -c 'cd example && VERBOSE=1 dub run dale -- -v'
+    sh -c 'cd example && VERBOSE=1 dub run dale -- -h'
+    sh -c 'cd example && VERBOSE=1 dub run dale'
     sh -c 'cd example && VERBOSE=1 dub run dale -- test dscanner lint build doc install unittest integration_test test banner uninstall clean_dub clean'
 }
 

@@ -1,5 +1,3 @@
-module gribble;
-
 import arithmancy;
 import dl;
 
@@ -49,7 +47,7 @@ void unitTest() {
 void integrationTest() {
     deps(&install);
 
-    assert(execOutput("add_two", ["-n", "2"]) == "4");
+    assert(execStdoutUTF8("add_two", ["-n", "2"]) == "4");
     assert(execStatus("add_two") != 0);
 }
 
