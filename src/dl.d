@@ -71,11 +71,6 @@ void phony(void function()[] tasks) {
     phony(tasks.map!(toDelegate).array);
 }
 
-// // Workaround for limited D process API.
-// const(string[string]) env() {
-//     return cast(const(string[string])) environment.toAA();
-// }
-
 // Hey genius, avoid executing commands whenever possible! Look for D libraries instead.
 //
 // Executes the given program with the given arguments.
@@ -87,7 +82,7 @@ auto execMut(string program, string[] arguments = []) {
 
     return pipeProcess(
         [program] ~ arguments,
-        cast(Redirect) 0,
+        cast(Redirect)7, // https://dlang.org/library/std/process/pipe_process.html
         environment.toAA()
     );
 }
