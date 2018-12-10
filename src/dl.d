@@ -80,7 +80,7 @@ auto execMut(string program, string[] arguments = []) {
         writefln("%s %s", program, join(arguments, " "));
     }
 
-    return pipeProcess([program] ~ arguments);
+    return pipeProcess([program] ~ arguments, Redirect.all);
 }
 
 // Hey genius, avoid executing commands whenever possible! Look for D libraries instead.

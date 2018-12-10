@@ -26,7 +26,9 @@ void lint() {
 // Lint, and then install artifacts
 @(TASK)
 void install() {
-    exec("dub", ["install"]);
+    auto cwd = getcwd();
+
+    exec("dub", ["add-local", cwd]);
 }
 
 // Uninstall artifacts
@@ -63,6 +65,7 @@ void test() {
 void buildDebug() {
     deps(&unitTest);
     exec("dub", ["build"]);
+    exec("dub", ["build", "--config", "add_two"]);
 }
 
 // Lint, unittest, and build release binaries
@@ -70,6 +73,7 @@ void buildDebug() {
 void buildRelease() {
     deps(&unitTest);
     exec("dub", ["build", "-b", "release"]);
+    exec("dub", ["build", "-b", "release", "--config", "add_two"]);
 }
 
 // Lint, unittest, and build debug and release binaries
