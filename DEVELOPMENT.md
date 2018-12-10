@@ -1,47 +1,34 @@
 # OVERVIEW
 
-tinyrick's own compilation process is compatible with standard `cargo`. We wrap some common workflows with `build.sh` tasks for convenience.
+dale's own compilation process is compatible with standard `dub`. We wrap some common workflows with `build.sh` tasks for convenience.
 
 # BUILDTIME REQUIREMENTS
 
-* [Rust](https://www.rust-lang.org/en-US/) 1.30+
-* [clippy](https://github.com/rust-lang-nursery/rust-clippy)
+* [D](https://dlang.org/) 2+
+* [dub](https://code.dlang.org/)
+* [D-Scanner](https://github.com/dlang-community/D-Scanner)
 * [coreutils](https://www.gnu.org/software/coreutils/coreutils.html)
-* [zip](https://linux.die.net/man/1/zip)
-* [Docker](https://www.docker.com/)
 
-# INSTALL BINARY ARTIFACTS FROM LOCAL SOURCE
+# INSTALL PACKAGE FROM LOCAL SOURCE FILES
 
 ```console
-$ sh build.sh install
+$ ./build.sh install
 ```
 
-# UNINSTALL BINARY ARTIFACTS
+# UNINSTALL PACKAGE
 
 ```console
-$ sh build.sh uninstall
+$ ./build.sh uninstall
 ```
 
-# BUILD: LINT, DOC, COMPILE, and TEST
+# BUILD: LINT, COMPILE, and TEST
 
 ```console
-$ sh build.sh [build]
-```
-
-# PUBLISH
-
-```console
-$ sh build.sh publish
-```
-
-# PORT
-
-```console
-$ sh build.sh port
+$ ./build.sh [build]
 ```
 
 # CLEAN
 
 ```console
-$ sh build.sh clean
+$ ./build.sh clean
 ```

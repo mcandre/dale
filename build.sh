@@ -83,10 +83,6 @@ build() {
     build_release
 }
 
-publish() {
-    dub publish
-}
-
 clean_example() {
     trap 'popd' ERR INT KILL
     pushd example
@@ -113,7 +109,7 @@ clean() {
     clean_dub
 }
 
-if [ -z "$1" ]; then
+if [ "$#" -lt 1 ]; then
     build
 fi
 

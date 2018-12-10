@@ -29,12 +29,6 @@ $ tinyrick uninstall
 $ tinyrick [build]
 ```
 
-# PUBLISH
-
-```console
-$ tinyrick publish
-```
-
 # CLEAN
 
 ```console

@@ -116,5 +116,5 @@ void main(string[] args) {
         &clean
     ]);
 
-    mixin(yyyup!(__MODULE__, "args", "build"));
+    mixin(yyyup!("args", "build"));
 }

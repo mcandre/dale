@@ -218,18 +218,18 @@ void loadTasks(string[] args, string defaultTaskName, TaskTable taskTable) {
     }
 }
 
-/** Register all available, statically declared tasks,
-    Given a module name, CLI arguments, and a default task. */
-template yyyup(alias mod, alias args, alias defaultTaskName) {
+/** Register all annotated TASKs in the caller module,
+    Given CLI arguments and a default task. */
+template yyyup(alias args, alias defaultTaskName) {
     const char[] yyyup = "
     import std.functional;
     import std.traits;
 
     TaskTable taskTable;
 
-    foreach(memberName; __traits(allMembers, " ~ mod ~ ")) {
-        static if (hasUDA!(__traits(getMember, " ~ mod ~ ", memberName), TASK)) {
-            Task task = toDelegate(&__traits(getMember, " ~ mod ~ ", memberName));
+    foreach(memberName; __traits(allMembers, mixin(__MODULE__))) {
+        static if (hasUDA!(__traits(getMember, mixin(__MODULE__), memberName), TASK)) {
+            Task task = toDelegate(&__traits(getMember, mixin(__MODULE__), memberName));
             taskTable[memberName] = task;
         }
     }
