@@ -18,7 +18,7 @@ lint() {
     true # dscanner
 }
 
-unittest() {
+unit_test() {
     lint
     dub test
 }
@@ -71,12 +71,12 @@ uninstall() {
 }
 
 build_debug() {
-    unittest
+    unit_test
     dub build
 }
 
 build_release() {
-    unittest
+    unit_test
     dub build -b release
 }
 
