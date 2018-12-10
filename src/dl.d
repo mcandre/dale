@@ -44,8 +44,8 @@ string binarySuffix() {
 
 // Declare a dependency on a task that may panic
 void deps(Task task) {
-    auto phony = (task in DALE_PHONY_TASKS) !is null;
-    auto hasRun = (task in DALE_DEPENDENCY_CACHE) !is null;
+    immutable phony = (task in DALE_PHONY_TASKS) !is null;
+    immutable hasRun = (task in DALE_DEPENDENCY_CACHE) !is null;
 
     if (phony || !hasRun) {
         task();
@@ -180,7 +180,7 @@ auto execStatus(string program, string[] arguments = []) {
 //
 // Executes the given program with the given arguments.
 // Panics if the command exits with a failure status.
-auto exec(string program, string[] arguments = []) {
+void exec(string program, string[] arguments = []) {
     assert(execStatus(program, arguments) == 0);
 }
 
