@@ -3,8 +3,8 @@
 Mathematical powers beyond your imagination!
 
 ```console
-$ add_two -v
-arithmancy 0.0.1
+$ dub run --config add_two -- -n 3
+5
 ```
 
 # RUNTIME REQUIREMENTS

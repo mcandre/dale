@@ -1,36 +1,34 @@
 # OVERVIEW
 
-arithmancy's own compilation process is compatible with standard `cargo`. We wrap some common workflows with `tinyrick` tasks for convenience.
+arithmancy's own compilation process is compatible with standard `dub`. We wrap some common workflows with `dale` tasks for convenience.
 
 # BUILDTIME REQUIREMENTS
 
-* [Rust](https://www.rust-lang.org/en-US/) 1.30+
+* [D](https://dlang.org/) 2+
+* [dub](https://code.dlang.org/)
+* [dale](https://github.com/mcandre/dale)
+* [D-Scanner](https://github.com/dlang-community/D-Scanner)
 
-## Recommended
-
-* [clippy](https://github.com/rust-lang-nursery/rust-clippy)
-* [tinyrick](https://github.com/mcandre/tinyrick) (e.g., `cargo install tinyrick`)
-
-# INSTALL BINARY ARTIFACTS FROM LOCAL SOURCE
+# INSTALL PACKAGE FROM LOCAL SOURCE FILES
 
 ```console
-$ tinyrick install
+$ dub run dale -- install
 ```
 
-# UNINSTALL BINARY ARTIFACTS
+# UNINSTALL PACKAGE
 
 ```console
-$ tinyrick uninstall
+$ dub run dale -- uninstall
 ```
 
-# BUILD: LINT, DOC, COMPILE, and TEST
+# BUILD: LINT, COMPILE, and TEST
 
 ```console
-$ tinyrick [build]
+$ dub run dale [-- build]
 ```
 
 # CLEAN
 
 ```console
-$ tinyrick clean
+$ dub run dale -- clean
 ```

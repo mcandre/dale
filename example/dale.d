@@ -4,6 +4,7 @@ import dl;
 import std.file;
 import std.stdio;
 import std.string;
+import std.process;
 
 /** Generate documentation */
 @(TASK)
@@ -35,7 +36,7 @@ void install() {
 @(TASK)
 void uninstall() {
     auto cwd = getcwd();
-    exec("dub", ["remove-local", cwd]);
+    wait(execMut("dub", ["remove-local", cwd]).pid);
 }
 
 /** Lint, and then run unit tests */
@@ -87,12 +88,6 @@ void build() {
 @(TASK)
 void banner() {
     writefln("%s %s", "arithmancy", ARITHMANCY_VERSION);
-}
-
-/** Publish to crate repository */
-@(TASK)
-void publish() {
-    exec("dub", ["publish"]);
 }
 
 /** Run dub clean */

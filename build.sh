@@ -66,7 +66,7 @@ install() {
 }
 
 uninstall() {
-    dub remove-local .
+    dub remove-local . || true
 }
 
 build_debug() {
