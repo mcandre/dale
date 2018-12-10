@@ -29,7 +29,20 @@ integration_test() {
     sh -c 'cd example && VERBOSE=1 dub run dale -- -v'
     sh -c 'cd example && VERBOSE=1 dub run dale -- -h'
     sh -c 'cd example && VERBOSE=1 dub run dale'
-    sh -c 'cd example && VERBOSE=1 dub run dale -- test dscanner lint build doc install unittest integration_test test banner uninstall clean_dub clean'
+    sh -c 'cd example && VERBOSE=1 dub run dale -- \
+        test \
+        dscanner \
+        lint \
+        build \
+        doc \
+        install \
+        unittest \
+        integration_test \
+        test \
+        banner \
+        uninstall \
+        clean_dub \
+        clean'
 }
 
 test() {

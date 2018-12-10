@@ -71,6 +71,11 @@ void phony(void function()[] tasks) {
     phony(tasks.map!(toDelegate).array);
 }
 
+// // Workaround for limited D process API.
+// const(string[string]) env() {
+//     return cast(const(string[string])) environment.toAA();
+// }
+
 // Hey genius, avoid executing commands whenever possible! Look for D libraries instead.
 //
 // Executes the given program with the given arguments.
@@ -80,7 +85,11 @@ auto execMut(string program, string[] arguments = []) {
         writefln("%s %s", program, join(arguments, " "));
     }
 
-    return pipeProcess([program] ~ arguments, Redirect.all);
+    return pipeProcess(
+        [program] ~ arguments,
+        cast(Redirect) 0,
+        environment.toAA()
+    );
 }
 
 // Hey genius, avoid executing commands whenever possible! Look for D libraries instead.
@@ -89,7 +98,16 @@ auto execMut(string program, string[] arguments = []) {
 // Returns a handle to the process's stdout.
 // Panics if the command exits with a failure status.
 auto execStdout(string program, string[] arguments = []) {
-    auto execution = execMut(program, arguments);
+    if (environment.get(DALE_VERBOSE_ENVIRONMENT_NAME) !is null) {
+        writefln("%s %s", program, join(arguments, " "));
+    }
+
+    auto execution = pipeProcess(
+        [program] ~ arguments,
+        Redirect.stdout,
+        environment.toAA()
+    );
+
     assert(wait(execution.pid) == 0);
     return execution.stdout;
 }
@@ -100,7 +118,15 @@ auto execStdout(string program, string[] arguments = []) {
 // Returns a handle to the process's stdout.
 // Panics if the command exits with a failure status.
 auto execStderr(string program, string[] arguments = []) {
-    auto execution = execMut(program, arguments);
+    if (environment.get(DALE_VERBOSE_ENVIRONMENT_NAME) !is null) {
+        writefln("%s %s", program, join(arguments, " "));
+    }
+
+    auto execution = pipeProcess([program] ~ arguments,
+        Redirect.stderr,
+        environment.toAA()
+    );
+
     assert(wait(execution.pid) == 0);
     return execution.stderr;
 }

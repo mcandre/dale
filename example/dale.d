@@ -3,6 +3,7 @@ import dl;
 
 import std.file;
 import std.stdio;
+import std.string;
 
 // Generate documentation
 @(TASK)
@@ -49,7 +50,7 @@ void unitTest() {
 void integrationTest() {
     deps(&install);
 
-    assert(execStdoutUTF8("./add_two", ["-n", "2"]) == "4");
+    assert(chomp(execStdoutUTF8("./add_two", ["-n", "2"])) == "4");
     assert(execStatus("./add_two") != 0);
 }
 
