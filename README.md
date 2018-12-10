@@ -95,13 +95,6 @@ configuration "shi_sha" {
 }
 ```
 
-Launch a terminal session in your project directory. Install and run the dale tool:
-
-```console
-$ dub fetch dale
-$ dub run dale
-```
-
 Watch how he behaves... I hope dale is practicing good manners :P
 
 What happens when you run:
