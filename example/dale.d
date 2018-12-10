@@ -28,14 +28,14 @@ void lint() {
 @(TASK)
 void install() {
     auto cwd = getcwd();
-
     exec("dub", ["add-local", cwd]);
 }
 
 // Uninstall artifacts
 @(TASK)
 void uninstall() {
-    exec("dub", ["remove", "arithmancy"]);
+    auto cwd = getcwd();
+    exec("dub", ["remove-local", cwd]);
 }
 
 // Lint, and then run unit tests

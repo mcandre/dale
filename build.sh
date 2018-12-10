@@ -67,7 +67,7 @@ install() {
 }
 
 uninstall() {
-    dub remove dale
+    dub remove-local .
 }
 
 build_debug() {
