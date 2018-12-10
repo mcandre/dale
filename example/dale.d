@@ -50,8 +50,8 @@ void unitTest() {
 void integrationTest() {
     deps(&install);
 
-    assert(chomp(execStdoutUTF8("./add_two", ["-n", "2"])) == "4");
-    assert(execStatus("./add_two") != 0);
+    assert(chomp(execStdoutUTF8("dub", ["run", "--verror", "--config", "add_two", "--", "-n", "2"])) == "4");
+    assert(execStatus("dub", ["run", "--verror", "--config", "add_two"]) != 0);
 }
 
 // Lint, and then run tests
@@ -102,45 +102,10 @@ void cleanDub() {
     exec("dub", ["clean"]);
 }
 
-// Remove .dub/ cache
-@(TASK)
-void cleanDotDub() {
-    if (exists(".dub")) {
-        rmdirRecurse(".dub");
-    }
-}
-
-// Remove static libraries
-@(TASK)
-void cleanStaticLibraries() {
-    auto cwd = getcwd();
-
-    foreach(library; dirEntries(cwd, "*.a", SpanMode.shallow)) {
-        remove(library);
-    }
-
-    foreach(library; dirEntries(cwd, "*.lib", SpanMode.shallow)) {
-        remove(library);
-    }
-}
-
-// Remove test binaries
-@(TASK)
-void cleanTests() {
-    auto cwd = getcwd();
-
-    foreach(binary; dirEntries(cwd, "*-test-*", SpanMode.shallow)) {
-        remove(binary);
-    }
-}
-
 // Clean workspaces
 @(TASK)
 void clean() {
     deps(&cleanDub);
-    deps(&cleanDotDub);
-    deps(&cleanStaticLibraries);
-    deps(&cleanTests);
 }
 
 // CLI entrypoint
@@ -154,5 +119,3 @@ void main(string[] args) {
 
     mixin(yyyup!(__MODULE__, "args", "build"));
 }
-
-void unused() {}

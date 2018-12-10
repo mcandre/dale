@@ -5,22 +5,26 @@ license "FreeBSD 2-clause"
 
 configuration "dale" {
     targetType "executable"
+    targetPath ".dub/build/bin"
     versions "APP"
     mainSourceFile "src/main.d"
-    buildRequirements "disallowDeprecations" "requireBoundsCheck"
-    buildOptions "warningsAsErrors"
+    buildRequirements "disallowDeprecations" "requireBoundsCheck" "requireContracts"
+    buildOptions "warningsAsErrors" "optimize" "deprecationErrors"
 }
 
 configuration "dl" {
     targetType "library"
-    buildRequirements "disallowDeprecations" "requireBoundsCheck"
-    buildOptions "warningsAsErrors"
+    targetPath ".dub/build/bin"
+    buildRequirements "disallowDeprecations" "requireBoundsCheck" "requireContracts"
+    buildOptions "warningsAsErrors" "optimize" "deprecationErrors"
 }
 
 configuration "unittest" {
     targetType "executable"
+    targetName "dale-test-unittest"
+    targetPath ".dub/build/test"
     mainSourceFile "tests.d"
-    buildRequirements "disallowDeprecations" "requireBoundsCheck"
-    buildOptions "warningsAsErrors" "unittests"
+    buildRequirements "disallowDeprecations" "requireBoundsCheck" "requireContracts"
+    buildOptions "warningsAsErrors" "optimize" "deprecationErrors" "unittests"
     dflags "-main"
 }

@@ -4,25 +4,30 @@ version "0.0.1"
 
 configuration "arithmancy" {
     targetType "library"
+    targetPath ".dub/build/bin"
 }
 
 configuration "add_two" {
     targetType "executable"
     targetName "add_two"
+    targetPath ".dub/build/bin"
     versions "APP"
     mainSourceFile "src/main.d"
 }
 
 configuration "unittest" {
     targetType "executable"
+    targetName "arithmancy-test-unittest"
+    targetPath ".dub/build/test"
     mainSourceFile "tests.d"
     buildOptions "unittests"
     dflags "-main"
 }
 
 configuration "shi_sha" {
-    targetName "shi_sha"
+    targetName "dale"
     targetType "executable"
+    targetPath ".dub/build/shi_sha"
     mainSourceFile "dale.d"
     dependency "dale" version="~0.0.1" path=".."
 }

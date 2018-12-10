@@ -26,7 +26,7 @@ unit_test() {
 integration_test() {
     install
 
-    trap 'popd' EXIT INT KILL
+    trap 'popd' ERR INT KILL
     pushd example
 
     dub run dale -- -l
@@ -47,14 +47,13 @@ integration_test() {
         banner \
         uninstall \
         cleanDub \
-        cleanDotDub \
-        cleanStaticLibraries \
-        cleanTests \
         clean
+
+    popd
 }
 
 test() {
-    unittest
+    unit_test
     integration_test
 }
 
@@ -90,16 +89,16 @@ publish() {
 }
 
 clean_example() {
-    rm -rf example/bin;
-    sh -c 'cd example && dub clean';
+    trap 'popd' ERR INT KILL
+    pushd example
+
+    dub clean
+
+    popd
 }
 
 clean_dub() {
     dub clean
-}
-
-clean_dotdub() {
-    rm -rf .dub || true
 }
 
 clean_static_libraries() {
@@ -113,9 +112,6 @@ clean_tests() {
 clean() {
     clean_example
     clean_dub
-    clean_dotdub
-    clean_static_libraries
-    clean_tests
 }
 
 if [ -z "$1" ]; then
