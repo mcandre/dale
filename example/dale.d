@@ -41,7 +41,7 @@ void uninstall() {
 // Lint, and then run unit tests
 @(TASK)
 void unitTest() {
-    // deps(&lint);
+    deps(&lint);
     exec("dub", ["test"]);
 }
 
@@ -77,10 +77,9 @@ void buildRelease() {
     exec("dub", ["build", "-b", "release", "--config", "add_two"]);
 }
 
-// Lint, unittest, and build debug and release binaries
+// Lint, unittest, and build (release) binaries
 @(TASK)
 void build() {
-    deps(&buildDebug);
     deps(&buildRelease);
 }
 

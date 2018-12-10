@@ -80,7 +80,6 @@ build_release() {
 }
 
 build() {
-    build_debug
     build_release
 }
 
