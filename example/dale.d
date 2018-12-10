@@ -20,8 +20,8 @@ void dscanner() {
 // Static code validation
 @(TASK)
 void lint() {
-    deps(&doc);
-    deps(&dscanner);
+    // deps(&doc);
+    // deps(&dscanner);
 }
 
 // Lint, and then install artifacts

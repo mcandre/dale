@@ -14,35 +14,43 @@ dscanner() {
 }
 
 lint() {
-    doc
-    dscanner
+    true # doc
+    true # dscanner
 }
 
 unittest() {
-    # lint
+    lint
     dub test
 }
 
 integration_test() {
     install
-    sh -c 'cd example && VERBOSE=1 dub run dale -- -l'
-    sh -c 'cd example && VERBOSE=1 dub run dale -- -v'
-    sh -c 'cd example && VERBOSE=1 dub run dale -- -h'
-    sh -c 'cd example && VERBOSE=1 dub run dale'
-    sh -c 'cd example && VERBOSE=1 dub run dale -- \
-        test \
-        dscanner \
+
+    trap 'popd' EXIT INT KILL
+    pushd example
+
+    dub run dale -- -l
+    dub run dale -- -v
+    dub run dale -- -h
+    dub run dale
+
+    # doc \
+    # dscanner \
+    VERBOSE=1 dub run dale -- \
         lint \
+        test \
         build \
-        doc \
         install \
-        unittest \
-        integration_test \
+        unitTest \
+        integrationTest \
         test \
         banner \
         uninstall \
-        clean_dub \
-        clean'
+        cleanDub \
+        cleanDotDub \
+        cleanStaticLibraries \
+        cleanTests \
+        clean
 }
 
 test() {

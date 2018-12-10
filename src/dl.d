@@ -163,7 +163,16 @@ auto execStderrUTF8(string program, string[] arguments = []) {
 // Returns the status value.
 // Panics if the command could not run to completion.
 auto execStatus(string program, string[] arguments = []) {
-    auto execution = execMut(program, arguments);
+    if (environment.get(DALE_VERBOSE_ENVIRONMENT_NAME) !is null) {
+        writefln("%s %s", program, join(arguments, " "));
+    }
+
+    auto execution = pipeProcess(
+        [program] ~ arguments,
+        cast(Redirect) 0,
+        environment.toAA()
+    );
+
     return wait(execution.pid);
 }
 
