@@ -49,8 +49,8 @@ void unitTest() {
 void integrationTest() {
     deps(&install);
 
-    assert(execStdoutUTF8("add_two", ["-n", "2"]) == "4");
-    assert(execStatus("add_two") != 0);
+    assert(execStdoutUTF8("./add_two", ["-n", "2"]) == "4");
+    assert(execStatus("./add_two") != 0);
 }
 
 // Lint, and then run tests

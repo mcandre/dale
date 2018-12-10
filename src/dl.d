@@ -105,6 +105,17 @@ auto execStderr(string program, string[] arguments = []) {
     return execution.stderr;
 }
 
+// Convenience function for reading an entire UTF-8 file.
+string readUTF8(File f) {
+    string s;
+
+    foreach(ubyte[] buf; f.byChunk(1024)) {
+        s ~= buf;
+    }
+
+    return s;
+}
+
 // Hey genius, avoid executing commands whenever possible! Look for D libraries instead.
 //
 // Executes the given program with the given arguments.
@@ -112,7 +123,7 @@ auto execStderr(string program, string[] arguments = []) {
 // Panics if the command exits with a failure status.
 auto execStdoutUTF8(string program, string[] arguments = []) {
     auto childStdout = execStdout(program, arguments);
-    return readText(childStdout.name);
+    return readUTF8(childStdout);
 }
 
 // Hey genius, avoid executing commands whenever possible! Look for D libraries instead.
@@ -122,7 +133,7 @@ auto execStdoutUTF8(string program, string[] arguments = []) {
 // Panics if the command exits with a failure status.
 auto execStderrUTF8(string program, string[] arguments = []) {
     auto childStderr = execStderr(program, arguments);
-    return readText(childStderr.name);
+    return readUTF8(childStderr);
 }
 
 // Hey genius, avoid executing commands whenever possible! Look for D libraries instead.
