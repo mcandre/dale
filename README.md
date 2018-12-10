@@ -36,23 +36,28 @@ import dl;
 
 immutable VERSION = "0.0.1";
 
+@(TASK)
 void banner() {
     writefln("arithmancy %s", VERSION);
 }
 
+@(TASK)
 void test() {
     exec("dub", ["test"]);
 }
 
+@(TASK)
 void build() {
     deps(test);
     exec("dub", ["build"]);
 }
 
+@(TASK)
 void clean() {
     exec("dub", ["clean"]);
 }
 
+@(TASK)
 void main(string[] args) {
     phony([&clean]);
     mixin(yyyup!("args", "build"));
