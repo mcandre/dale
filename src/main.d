@@ -1,4 +1,4 @@
-// CLI tinyrick tool
+/** CLI tinyrick tool */
 
 import dl;
 
@@ -8,10 +8,13 @@ import std.getopt;
 import std.stdio;
 import std.typecons;
 
-bool listTasks;
-bool showVersion;
+/** Flag to enable task listing */
+private bool listTasks;
 
-// Show short CLI spec
+/** Flag to enable version banner */
+private bool showVersion;
+
+/** Show short CLI spec */
 void usage(string program, GetoptResult opts) {
     defaultGetoptPrinter(
         format("Usage: %s [OPTIONS]", program),
@@ -19,12 +22,12 @@ void usage(string program, GetoptResult opts) {
     );
 }
 
-// Show version information
+/** Show version information */
 void banner() {
     writefln("dale %s", DALE_VERSION);
 }
 
-// CLI entrypoint
+/** CLI entrypoint */
 version(APP) {
     void main(string[] args) {
         auto argsRest = args[1..args.length]; // Drop program name

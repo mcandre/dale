@@ -14,8 +14,8 @@ dscanner() {
 }
 
 lint() {
-    true # doc
-    true # dscanner
+    # doc
+    dscanner
 }
 
 unit_test() {
@@ -35,8 +35,8 @@ integration_test() {
     dub run dale
 
     # doc \
-    # dscanner \
     VERBOSE=1 dub run dale -- \
+        dscanner \
         lint \
         test \
         build \

@@ -1,4 +1,4 @@
-// CLI utility for addition by two
+/** CLI utility for addition by two, wowzers! */
 
 import arithmancy;
 
@@ -8,9 +8,10 @@ import std.getopt;
 import std.stdio;
 import std.typecons;
 
-int n;
+/** Flag to specify numbers */
+private int n;
 
-// Show short CLI spec
+/** Show short CLI spec */
 void usage(string program, GetoptResult opts) {
     defaultGetoptPrinter(
         format("Usage: %s [OPTIONS]", program),
@@ -18,7 +19,7 @@ void usage(string program, GetoptResult opts) {
     );
 }
 
-// CLI entry point
+/** CLI entry point */
 version(APP) {
     void main(string[] args) {
         immutable program = args[0];
