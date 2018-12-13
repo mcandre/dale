@@ -27,6 +27,10 @@ $ ./build.sh uninstall
 $ ./build.sh [build]
 ```
 
+# PUBLISH
+
+(Tag a new VCS release.)
+
 # CLEAN
 
 ```console

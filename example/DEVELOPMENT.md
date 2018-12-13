@@ -27,6 +27,10 @@ $ dub run dale -- uninstall
 $ dub run dale [-- build]
 ```
 
+# PUBLISH
+
+(Tag a new VCS release.)
+
 # CLEAN
 
 ```console
