@@ -29,5 +29,5 @@ configuration "shi_sha" {
     targetType "executable"
     targetPath ".dub/build/shi_sha"
     mainSourceFile "dale.d"
-    dependency "dale" version="~0.0.1" path=".."
+    dependency "dale" version="0.0.1" path=".."
 }

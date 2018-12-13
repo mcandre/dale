@@ -21,9 +21,19 @@ Usage: ../.dub/build/bin/dale [OPTIONS]
 
 dale is a task runner for D projects, a more portable alternative to makefiles. dale wraps common dub workflows, providing a convenient way to kick off your various build commands.
 
+# DUB
+
+https://code.dlang.org/packages/dale
+
 # RUNTIME REQUIREMENTS
 
 * [D](https://dlang.org) 2+
+
+# INSTALL
+
+```console
+$ dub fetch dale
+```
 
 # SETUP
 
@@ -74,7 +84,7 @@ configuration "shi_sha" {
     targetType "executable"
     targetPath ".dub/build/shi_sha"
     mainSourceFile "dale.d"
-    dependency "dale" version="~0.0.1"
+    dependency "dale" version="0.0.1"
 }
 ```
 
@@ -88,7 +98,7 @@ configuration "shi_sha" {
             "targetPath": ".dub/build/shi_sha",
             "mainSourceFile": "dale.d",
             "dependencies": {
-                "dale": "~0.0.1"
+                "dale": "0.0.1"
             }
         }
     ]
