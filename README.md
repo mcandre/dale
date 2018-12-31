@@ -134,7 +134,7 @@ Let's break down the code so far:
 
 Just because the dale library offers several *supremely convenient* macros for executing shell commands doesn't mean that you should always shell out. No way, man!
 
-Whenever possible, use regular D code, as in the `banner()` example. There's like a ba-jillion [packages](https://code.dlang.org) of prewritten D code, so you might as well use it!
+Whenever possible, use regular D code, as in the `banner()` example. There's like a ba-jillion [packages](https://code.dlang.org) of prewritten D code, so you might as well use it! Dale uses no DSL's, just plain old D code, so it's easy to integrate with other D libraries.
 
 # CONTRIBUTING
 
