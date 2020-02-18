@@ -147,6 +147,7 @@ For more details on developing dale itself, see [DEVELOPMENT.md](DEVELOPMENT.md)
 * [rdmd](https://dlang.org/rdmd.html), a fast-compiling interpreter for D
 * [GNU make](https://www.gnu.org/software/make/), a classic task runner
 * [tinyrick](https://github.com/mcandre/tinyrick) for Rust projects
+* [vast](https://github.com/mcandre/vast) for UNIX shell script projects
 
 # EVEN MORE EXAMPLES
 
