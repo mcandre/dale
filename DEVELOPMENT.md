@@ -1,6 +1,6 @@
 # OVERVIEW
 
-dale's own compilation process is compatible with standard `dub`. We wrap some common workflows with `build.sh` tasks for convenience.
+dale's own compilation process is compatible with standard `dub`. We wrap some common workflows with `build` tasks for convenience.
 
 # BUILDTIME REQUIREMENTS
 
@@ -12,19 +12,19 @@ dale's own compilation process is compatible with standard `dub`. We wrap some c
 # INSTALL PACKAGE FROM LOCAL SOURCE FILES
 
 ```console
-$ ./build.sh install
+$ ./build install
 ```
 
 # UNINSTALL PACKAGE
 
 ```console
-$ ./build.sh uninstall
+$ ./build uninstall
 ```
 
 # BUILD: LINT, COMPILE, and TEST
 
 ```console
-$ ./build.sh [build]
+$ ./build [build]
 ```
 
 # PUBLISH
@@ -34,5 +34,5 @@ $ ./build.sh [build]
 # CLEAN
 
 ```console
-$ ./build.sh clean
+$ ./build clean
 ```

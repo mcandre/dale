@@ -1,5 +1,6 @@
 #!/bin/bash
 set -eEuo pipefail
+IFS=$'\n\t '
 
 PACKAGE='dale'
 VERSION='0.0.1'
