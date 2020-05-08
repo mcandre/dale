@@ -27,7 +27,7 @@ unit_test() {
 integration_test() {
     install
 
-    trap 'popd' ERR INT KILL
+    trap 'popd' EXIT
     pushd example
 
     dub run dale -- -l
