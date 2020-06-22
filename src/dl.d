@@ -59,6 +59,19 @@ void deps(void function() task) {
     deps(toDelegate(task));
 }
 
+unittest {
+    auto xs = [1, 2, 3];
+
+    void oneMore() {
+        xs ~= [4];
+    }
+
+    deps(&oneMore);
+
+    assert(xs == [1, 2, 3, 4]);
+}
+
+
 /** Declare tasks with no obviously cacheable artifacts. */
 void phony(Task[] tasks) {
     foreach(task; tasks) {
