@@ -145,7 +145,7 @@ For more details on developing dale itself, see [DEVELOPMENT.md](DEVELOPMENT.md)
 * Inspired by the excellent [mage](https://magefile.org/) build system for Go projects
 * Thank you [Kenji](https://forum.dlang.org/post/mailman.2348.1382205515.1719.digitalmars-d@puremagic.com) for sharing reflection snippets!
 * [rdmd](https://dlang.org/rdmd.html), a fast-compiling interpreter for D
-* [GNU make](https://www.gnu.org/software/make/), a classic task runner
+* [make](https://pubs.opengroup.org/onlinepubs/009695299/utilities/make.html), a classic task runner
 * [rez](https://github.com/mcandre/rez), a C/C++ task runner
 * [tinyrick](https://github.com/mcandre/tinyrick) for Rust projects
 * [vast](https://github.com/mcandre/vast) for UNIX shell script projects
