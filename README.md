@@ -144,9 +144,17 @@ For more details on developing dale itself, see [DEVELOPMENT.md](DEVELOPMENT.md)
 
 * Inspired by the excellent [mage](https://magefile.org/) build system for Go projects
 * Thank you [Kenji](https://forum.dlang.org/post/mailman.2348.1382205515.1719.digitalmars-d@puremagic.com) for sharing reflection snippets!
+* [cmake](https://cmake.org/), a build system for C/C++ projects
+* [GNU autotools](https://www.gnu.org/software/automake/manual/html_node/Autotools-Introduction.html), a build system for Linux C/C++ projects
+* [Gradle](https://gradle.org/), a build system for JVM projects
+* [lake](https://luarocks.org/modules/steved/lake), a Lua task runner
+* [Mage](https://magefile.org/), a task runner for Go projects
+* [npm](https://www.npmjs.com/), [Grunt](https://gruntjs.com/), Node.js task runners
+* [POSIX make](https://pubs.opengroup.org/onlinepubs/009695299/utilities/make.html), a task runner standard for C/C++ and various other software projects
+* [Rake](https://ruby.github.io/rake/), a task runner for Ruby projects
 * [rdmd](https://dlang.org/rdmd.html), a fast-compiling interpreter for D
-* [make](https://pubs.opengroup.org/onlinepubs/009695299/utilities/make.html), a classic task runner
 * [rez](https://github.com/mcandre/rez), a C/C++ task runner
+* [Shake](https://shakebuild.com/), a task runner for Haskell projects
 * [tinyrick](https://github.com/mcandre/tinyrick) for Rust projects
 * [vast](https://github.com/mcandre/vast) for UNIX shell script projects
 
