@@ -153,10 +153,8 @@ For more details on developing dale itself, see [DEVELOPMENT.md](DEVELOPMENT.md)
 * [POSIX make](https://pubs.opengroup.org/onlinepubs/009695299/utilities/make.html), a task runner standard for C/C++ and various other software projects
 * [Rake](https://ruby.github.io/rake/), a task runner for Ruby projects
 * [rdmd](https://dlang.org/rdmd.html), a fast-compiling interpreter for D
-* [rez](https://github.com/mcandre/rez), a C/C++ task runner
 * [Shake](https://shakebuild.com/), a task runner for Haskell projects
 * [tinyrick](https://github.com/mcandre/tinyrick) for Rust projects
-* [vast](https://github.com/mcandre/vast) for UNIX shell script projects
 
 # EVEN MORE EXAMPLES
 
