@@ -25,6 +25,10 @@ dale is a task runner for D projects, a more portable alternative to makefiles. 
 
 https://code.dlang.org/packages/dale
 
+# LICENSE
+
+BSD-2-Clause
+
 # RUNTIME REQUIREMENTS
 
 * [D](https://dlang.org) 2+
