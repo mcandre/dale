@@ -148,6 +148,7 @@ For more details on developing dale itself, see [DEVELOPMENT.md](DEVELOPMENT.md)
 
 * Inspired by the excellent [mage](https://magefile.org/) build system for Go projects
 * Thank you [Kenji](https://forum.dlang.org/post/mailman.2348.1382205515.1719.digitalmars-d@puremagic.com) for sharing reflection snippets!
+* [beltaloada](https://github.com/mcandre/beltaloada), a guide to writing build systems for (POSIX) sh
 * [cmake](https://cmake.org/), a build system for C/C++ projects
 * [GNU autotools](https://www.gnu.org/software/automake/manual/html_node/Autotools-Introduction.html), a build system for Linux C/C++ projects
 * [Gradle](https://gradle.org/), a build system for JVM projects
